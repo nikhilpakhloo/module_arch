@@ -28,31 +28,28 @@ const TabNavigator = () => {
   const { theme } = useTheme();
 
   return (
-    <Tab.Navigator
-      screenOptions={{
-        headerShown: false,
-        tabBarStyle: {
-          backgroundColor: theme.colors.background,
-        },
-        tabBarActiveTintColor: theme.colors.primary,
-        tabBarInactiveTintColor: theme.colors.text,
-      
-      }}
-    >
+ <Tab.Navigator
+  screenOptions={({ route }) => ({
+    headerShown: false,
+    tabBarStyle: { backgroundColor: theme.colors.background },
+    tabBarActiveTintColor: theme.colors.primary,
+    tabBarInactiveTintColor: theme.colors.text,
+    tabBarIcon: ({ color, size }) => {
+      const iconName = route.name === "HomeStack" ? "home" : "user";
+      return <Icon name={iconName} size={size} color={color} />;
+    },
+  })}
+>
       <Tab.Screen
         name="HomeStack"
         component={HomeStack}
-        options={{ tabBarLabel: "Home" , tabBarIcon: ({ color, size }) => (
-          <Icon name="home" size={size} color={color} />
-        ),}}
+        options={{ tabBarLabel: "Home"}}
       />
 
       <Tab.Screen
         name="ProfileStack"
         component={ProfileStack}
-        options={{ tabBarLabel: "Profile" , tabBarIcon: ({ color, size }) => (
-          <Icon name="user" size={size} color={color} />
-        ),}}
+        options={{ tabBarLabel: "Profile"}}
       />
     </Tab.Navigator>
   );
