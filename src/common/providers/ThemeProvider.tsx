@@ -13,6 +13,10 @@ export interface Theme {
     background: string;
     text: string;
     primary: string;
+    card: string;
+    border: string;
+    textSecondary: string;
+    buttonText: string;
   };
 }
 
