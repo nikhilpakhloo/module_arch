@@ -3,7 +3,7 @@ import { Login } from "../modules/auth";
 const Stack = createNativeStackNavigator();
 function LoginStack(){
     return (
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Login" component={Login} />
         </Stack.Navigator>
     )

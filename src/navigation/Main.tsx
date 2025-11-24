@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Profile } from "../modules/profile";
 import { Home } from "../modules/home";
 import { useTheme } from "../common/providers/ThemeProvider";
+import { Icon } from "../common/components";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -35,18 +36,23 @@ const TabNavigator = () => {
         },
         tabBarActiveTintColor: theme.colors.primary,
         tabBarInactiveTintColor: theme.colors.text,
+      
       }}
     >
       <Tab.Screen
         name="HomeStack"
         component={HomeStack}
-        options={{ tabBarLabel: "Home" }}
+        options={{ tabBarLabel: "Home" , tabBarIcon: ({ color, size }) => (
+          <Icon name="home" size={size} color={color} />
+        ),}}
       />
 
       <Tab.Screen
         name="ProfileStack"
         component={ProfileStack}
-        options={{ tabBarLabel: "Profile" }}
+        options={{ tabBarLabel: "Profile" , tabBarIcon: ({ color, size }) => (
+          <Icon name="user" size={size} color={color} />
+        ),}}
       />
     </Tab.Navigator>
   );
