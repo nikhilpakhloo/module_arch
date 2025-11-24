@@ -2,29 +2,54 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Profile } from "../modules/profile";
 import { Home } from "../modules/home";
+import { useTheme } from "../common/providers/ThemeProvider";
+
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
-function HomeStack(){
+
+function HomeStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Home" component={Home} />
     </Stack.Navigator>
-    
-  )
+  );
 }
-function ProfileStack(){
+
+function ProfileStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Profile" component={Profile} />
     </Stack.Navigator>
-  )
+  );
 }
+
 const TabNavigator = () => {
-    return (
-        <Tab.Navigator>
-          <Tab.Screen name="HomeStack" component={HomeStack} />
-          <Tab.Screen name="ProfileStack" component={ProfileStack} />
-        </Tab.Navigator>
-    );
+  const { theme } = useTheme();
+
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarStyle: {
+          backgroundColor: theme.colors.background,
+        },
+        tabBarActiveTintColor: theme.colors.primary,
+        tabBarInactiveTintColor: theme.colors.text,
+      }}
+    >
+      <Tab.Screen
+        name="HomeStack"
+        component={HomeStack}
+        options={{ tabBarLabel: "Home" }}
+      />
+
+      <Tab.Screen
+        name="ProfileStack"
+        component={ProfileStack}
+        options={{ tabBarLabel: "Profile" }}
+      />
+    </Tab.Navigator>
+  );
 };
+
 export default TabNavigator;
