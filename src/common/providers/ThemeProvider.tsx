@@ -1,11 +1,11 @@
 import React, {
   createContext,
   useContext,
-  useState,
   useMemo,
   ReactNode,
 } from "react";
 import { lightTheme, darkTheme } from "../theme";
+import { useColorScheme } from "react-native";
 
 export interface Theme {
   mode: "light" | "dark";
@@ -18,7 +18,6 @@ export interface Theme {
 
 interface ThemeContextType {
   theme: Theme;
-  toggleTheme: () => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | null>(null);
@@ -28,13 +27,11 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
-  const [theme, setTheme] = useState<Theme>(lightTheme);
+  const scheme = useColorScheme(); 
 
-  const toggleTheme = () => {
-    setTheme((prev) => (prev.mode === "light" ? darkTheme : lightTheme));
-  };
+  const selectedTheme = scheme === "dark" ? darkTheme : lightTheme;
 
-  const value = useMemo(() => ({ theme, toggleTheme }), [theme]);
+  const value = useMemo(() => ({ theme: selectedTheme }), [scheme]);
 
   return (
     <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>

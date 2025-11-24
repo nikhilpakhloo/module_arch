@@ -3,7 +3,7 @@ import { Button, StyleSheet, Text, View } from "react-native";
 import { useTheme } from "../../../common/providers/ThemeProvider";
 
 const Home = () => {
-  const { theme , toggleTheme} = useTheme();
+  const { theme } = useTheme();
 
   return (
     <View
@@ -15,7 +15,6 @@ const Home = () => {
       <Text style={{ color: theme.colors.text }}>
         Home
       </Text>
-      <Button title="Toggle Theme" onPress={toggleTheme} />
     </View>
   );
 };
